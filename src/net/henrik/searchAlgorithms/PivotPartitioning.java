@@ -2,17 +2,18 @@ package net.henrik.searchAlgorithms;
 
 import java.util.Comparator;
 
-public class PivotPartitioning implements SortingAlgorithm<Integer> {
+public class PivotPartitioning<T> implements SortingAlgorithm<T> {
 
-    private final Comparator<Integer> comparator;
+    private final Comparator<T> comparator;
 
 
-    public PivotPartitioning(Comparator<Integer> comparator) {
+    public PivotPartitioning(Comparator<T> comparator) {
         this.comparator = comparator;
     }
 
-    public void sort(Integer[] arr) {
-        Integer pivot = getPivot(arr, 0, arr.length);
+    public void sort(T[] arr) {
+        partitionHelper(arr, 0, arr.length - 1);
+        /*T pivot = getPivot(arr, 0, arr.length);
         int i = 0;
         int j = 0;
         for (int k = 0; k < arr.length; k++) {
@@ -22,7 +23,6 @@ public class PivotPartitioning implements SortingAlgorithm<Integer> {
                 arr[j] = temp;
                 j++;
             } else if (comparator.compare(arr[k], pivot) < 0) {
-                // Mit erstem element der > pivot liste tauschen
                 var temp = arr[k];
                 arr[k] = arr[j];
                 arr[j] = arr[i];
@@ -34,46 +34,42 @@ public class PivotPartitioning implements SortingAlgorithm<Integer> {
         }
         if (i > 1)
             partitionHelper(arr, 0, i - 1);
-        if (j - 1 < arr.length )
-            partitionHelper(arr, j + 1, arr.length);
+        if (j - 1 < arr.length)
+            partitionHelper(arr, j, arr.length - 1);
+
+         */
     }
 
-    private Integer getPivot(Integer[] arr, int from, int too) {
-        if (from + 1 == too)
+    private T getPivot(T[] arr, int from, int too) {
+        if (from == too)
             throw new IllegalArgumentException();
-        double median = (double) arr[from];
-        for (int i = from + 1; i < too; i++) {
-            median = (median + (Integer) arr[i] )/ 2;
-        }
-        return (int) median;
+        return arr[from];
     }
 
-    private void partitionHelper(Integer[] arr, int from, int too) {
-        if (from == too || from + 1 == too)
+    private void partitionHelper(T[] arr, int from, int too) {
+        if (from == too)
             return;
-        Integer pivot = getPivot(arr,from,too);
+        T pivot = getPivot(arr, from, too);
         int i = from;
         int j = from;
-        for (int k = from; k < too; k++) {
+        for (int k = from; k <= too; k++) {
             if ((comparator.compare(arr[k], pivot) == 0)) {
                 var temp = arr[k];
                 arr[k] = arr[j];
                 arr[j] = temp;
                 j++;
             } else if (comparator.compare(arr[k], pivot) < 0) {
-                // Mit erstem element der > pivot liste tauschen
                 var temp = arr[k];
                 arr[k] = arr[j];
                 arr[j] = arr[i];
-
                 arr[i] = temp;
                 i++;
                 j++;
             }
         }
-        if (j > 1) {
-            partitionHelper(arr, from, i);
-        }
-        partitionHelper(arr, j, too);
+        if (i - from > 1)
+            partitionHelper(arr, from, i - 1);
+        if (too - j > 0)
+            partitionHelper(arr, j, too);
     }
 }
