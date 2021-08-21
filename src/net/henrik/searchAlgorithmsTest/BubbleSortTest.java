@@ -19,7 +19,7 @@ public class BubbleSortTest {
         System.out.println(Arrays.toString(arr));
         */
 
-        var arr2 = StringUtils.generateArrayString(1000000,20);
+        var arr2 = StringUtils.generateArrayString(10000,10);
         System.out.println(Arrays.toString(arr2));
         var sortingAlgorithm2 = new BubbleSort<>(String::compareTo);
         sortingAlgorithm2.sort(arr2);

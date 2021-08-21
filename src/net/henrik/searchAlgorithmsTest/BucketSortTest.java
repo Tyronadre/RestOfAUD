@@ -14,7 +14,7 @@ public class BucketSortTest {
         }
 
         var stringBucketSort = new BucketSortString(alphabet,String::compareTo);
-        var stringArr = StringUtils.generateArrayString(1000000,20);
+        var stringArr = StringUtils.generateArrayString(10000000,10);
         System.out.println(Arrays.toString(stringArr));
         stringBucketSort.sort(stringArr);
         System.out.println(Arrays.toString(stringArr));

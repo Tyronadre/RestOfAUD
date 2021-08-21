@@ -10,7 +10,7 @@ public class StringUtils {
         for (int i = 0; i < size; i++) {
             arr[i] = random
                     .ints(97, 123)
-                    .limit(random.nextInt((int) Math.pow(10,length)))
+                    .limit(random.nextInt(length+1))
                     .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                     .toString();
         }

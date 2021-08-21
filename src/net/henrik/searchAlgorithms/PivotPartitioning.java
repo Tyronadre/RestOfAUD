@@ -51,7 +51,7 @@ public class PivotPartitioning implements SortingAlgorithm<Integer> {
     private void partitionHelper(Integer[] arr, int from, int too) {
         if (from == too || from + 1 == too)
             return;
-        Integer pivot = arr[from];
+        Integer pivot = getPivot(arr,from,too);
         int i = from;
         int j = from;
         for (int k = from; k < too; k++) {
@@ -71,8 +71,8 @@ public class PivotPartitioning implements SortingAlgorithm<Integer> {
                 j++;
             }
         }
-        if (j != 0) {
-            partitionHelper(arr, 0, i);
+        if (j > 1) {
+            partitionHelper(arr, from, i);
         }
         partitionHelper(arr, j, too);
     }

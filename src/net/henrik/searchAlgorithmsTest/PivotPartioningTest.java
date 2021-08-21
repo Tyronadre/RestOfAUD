@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class PivotPartioningTest {
 
     public static void main(String[] args) {
-        var arr = IntUtils.generateArray(20,3);
+        var arr = IntUtils.generateArray(10000000,5);
         System.out.println(Arrays.toString(arr));
 
         SortingAlgorithm<Integer> pivotPartitioning = new PivotPartitioning(Integer::compareTo);
