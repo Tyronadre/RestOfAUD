@@ -1,7 +1,6 @@
 package net.henrik.utils;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -39,9 +38,8 @@ public class StringUtils {
             throw new NullPointerException();
         if (arr.length == 1)
             return true;
-        Comparator<String> comparator = Comparator.naturalOrder();
         for (int i = 1; i < arr.length; i++) {
-            if (comparator.compare(arr[i - 1], arr[i]) > 0) {
+            if (arr[i - 1].compareTo(arr[i]) > 0) {
                 System.out.println("FAILED: " + arr[i - 1] + "|" + arr[i] + " at " + (i - 1) + "|" + i);
                 return false;
             }
@@ -55,5 +53,24 @@ public class StringUtils {
             alphabet.add((char) (i));
         }
         return alphabet;
+    }
+
+    public static String[] toStringArray(List<String> bucket) {
+        String[] arr = new String[bucket.size()];
+        for (int i = 0; i < bucket.size(); i++) {
+            arr[i] = bucket.get(i);
+        }
+        return arr;
+    }
+
+    public static String[] toStringArray(List<List<String>> lst, int size) {
+        String[] arr = new String[size];
+        int counter = 0;
+        for (var innerLst : lst) {
+            for (var string : innerLst) {
+                arr[counter++] = string;
+            }
+        }
+        return arr;
     }
 }

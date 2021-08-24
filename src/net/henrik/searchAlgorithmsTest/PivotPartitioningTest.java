@@ -8,11 +8,13 @@ import net.henrik.utils.StringUtils;
 import java.util.Arrays;
 
 public class PivotPartitioningTest {
-    private static final int TEST_LENGTH = 10000;
 
     public static void main(String[] args) {
-        if (args == null)
-            args = new String[]{"1"};
+        //INIT
+        if (args == null) {
+            args = new String[]{"1", "10"};
+        }
+        int TEST_LENGTH = Integer.parseInt(args[1]);
 
         System.out.println("TESTING INTEGER");
         var arr = IntUtils.generateArray(TEST_LENGTH);

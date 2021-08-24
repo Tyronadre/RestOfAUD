@@ -1,55 +1,41 @@
 package net.henrik.searchAlgorithmsTest;
 
 import net.henrik.searchAlgorithms.BubbleSort;
-import net.henrik.searchAlgorithms.SortingAlgorithm;
+import net.henrik.utils.IntUtils;
 import net.henrik.utils.StringUtils;
 
 import java.util.Arrays;
-import java.util.Random;
 
 
 public class BubbleSortTest {
-    private static long SEED;
+    private static final int TEST_LENGTH = 10000;
 
     public static void main(String[] args) {
-        /*SortingAlgorithm<Integer> sortingAlgorithm = new BubbleSort<>(Integer::compareTo);
-        var arr = generateArray(1000);
-        System.out.println(Arrays.toString(arr));
-        sortingAlgorithm.sort(arr);
-        System.out.println(Arrays.toString(arr));
-        */
+        //INIT
+        if (args == null) {
+            args = new String[]{"1", "10"};
+        }
+        int TEST_LENGTH = Integer.parseInt(args[1]);
 
-        var arr2 = StringUtils.generateArrayString(10000,10);
-        System.out.println(Arrays.toString(arr2));
+        System.out.println("TESTING INTEGER");
+        var intArr = IntUtils.generateArray(TEST_LENGTH);
+        if (args[0].equals("1"))
+            System.out.println(Arrays.toString(intArr));
+        var intBubbleSort = new BubbleSort<>(Integer::compareTo);
+        intBubbleSort.sort(intArr);
+        if (args[0].equals("1"))
+            System.out.println(Arrays.toString(intArr));
+        System.out.println(IntUtils.checkAscendingOrder(intArr));
+
+
+        System.out.println("\nTESTING STRING");
+        var stringArr = StringUtils.generateArrayString(TEST_LENGTH, 10);
+        if (args[0].equals("1"))
+            System.out.println(Arrays.toString(stringArr));
         var sortingAlgorithm2 = new BubbleSort<>(String::compareTo);
-        sortingAlgorithm2.sort(arr2);
-        System.out.println(Arrays.toString(arr2));
+        sortingAlgorithm2.sort(stringArr);
+        if (args[0].equals("1"))
+            System.out.println(Arrays.toString(stringArr));
+        System.out.println(StringUtils.checkAscendingOrder(stringArr));
     }
-
-
-    private static Integer[] generateArray(int size) {
-        Random random = new Random();
-        Integer[] arr = new Integer[size];
-        for (int i = 0; i < size; i++) {
-            arr[i] = random.nextInt();
-        }
-        return arr;
-    }
-
-    private static String[] generateArrayString(int size) {
-        String[] arr = new String[size];
-        Random random = new Random();
-        int leftLimit = 97; // letter 'a'
-        int rightLimit = 122; // letter 'z'
-        for (int i = 0; i < size; i++) {
-            arr[i] = random
-                    .ints(leftLimit, rightLimit + 1)
-                    .limit(random.nextInt(10))
-                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                    .toString();
-        }
-        return arr;
-
-    }
-
 }

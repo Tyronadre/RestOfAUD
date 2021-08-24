@@ -1,6 +1,7 @@
 package net.henrik.searchAlgorithms;
 
 import java.util.Comparator;
+import java.util.List;
 
 public class PivotPartitioning<T> implements SortingAlgorithm<T> {
 
@@ -13,35 +14,10 @@ public class PivotPartitioning<T> implements SortingAlgorithm<T> {
 
     public void sort(T[] arr) {
         partitionHelper(arr, 0, arr.length - 1);
-        /*T pivot = getPivot(arr, 0, arr.length);
-        int i = 0;
-        int j = 0;
-        for (int k = 0; k < arr.length; k++) {
-            if ((comparator.compare(arr[k], pivot) == 0)) {
-                var temp = arr[k];
-                arr[k] = arr[j];
-                arr[j] = temp;
-                j++;
-            } else if (comparator.compare(arr[k], pivot) < 0) {
-                var temp = arr[k];
-                arr[k] = arr[j];
-                arr[j] = arr[i];
-
-                arr[i] = temp;
-                i++;
-                j++;
-            }
-        }
-        if (i > 1)
-            partitionHelper(arr, 0, i - 1);
-        if (j - 1 < arr.length)
-            partitionHelper(arr, j, arr.length - 1);
-
-         */
     }
 
     private T getPivot(T[] arr, int from, int too) {
-        if (from == too)
+        if (from == too || arr == null || arr.length < from)
             throw new IllegalArgumentException();
         return arr[from];
     }
